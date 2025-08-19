@@ -2,28 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
 use Laravel\Scout\Searchable;
 
-class Product extends Model
-{
-    use Searchable;
-
-    // Optioneel: eigen indexnaam
-    public function searchableAs(): string
-    {
-        return 'products';
-    }
-
-    // Welke velden worden geïndexeerd
-    public function toSearchableArray(): array
-    {
-        return [
-            'id'          => (int) $this->id,
-            'name'        => (string) $this->name,
-            'description' => (string) ($this->description ?? ''),
-            'price'       => (float) $this->price,
-            'is_active'   => (bool) $this->is_active,
-        ];
-    }
+class Product extends Model {
+  use Searchable;
+  public function toSearchableArray(): array {
+    return [
+      'id'=>$this->id,'name'=>$this->name,
+      'description'=>$this->description,
+      'price'=>(float)$this->price,'is_active'=>(bool)$this->is_active,
+    ];
+  }
 }
+
 
